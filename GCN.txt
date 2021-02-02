@@ -25,13 +25,20 @@ weight 的维度为(D,K) (input_dim,out_dim)
 (再加上bias)
 
 实际意义对图进行卷积后每个节点都学习到了neighbourhood节点的信息 每次卷积都是相邻节点特征进行学习，
-所以卷积次数决定了学习邻居节点的广度 平均卷积2-3次左右
+所以卷积次数决定了学习邻居节点的广度 平均卷积2-3次左右效果最好
 
 可以对每个输出节点的特征通过softmax函数进行分类 （节点分类）
 
-GCN的深度(层数)
-GCN的最佳层数和邻居矩阵A的稀疏程度有关系，当图的稀疏度较低时,很快会出现过平滑现象.
 
-GCN的层数应设置为图的平均最短路径(average shortest path)   论文：https://arxiv.org/pdf/1810.05997.pdf
+延申：
+
+GNN的深度(层数)
+GNN的最佳层数和邻居矩阵A的稀疏程度有关系，当图的稀疏度较低时,很快会出现过平滑现象.
+
+GCN 层数高时性能会下降 (远距离节点信息传播能力下降)
+
+解决模型: PPNP/AAPNP 论文：https://arxiv.org/pdf/1810.05997.pdf
+
+PPNP/AAPNP的层数应设置为图的平均最短路径(average shortest path)   
 
 average shortest path 计算方法： https://networkx.org/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.generic.average_shortest_path_length.html
