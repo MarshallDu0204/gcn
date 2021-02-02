@@ -1,4 +1,9 @@
 Graph Convolution Network
+数据预处理：
+数据预处理：
+normalization
+L=D^-0.5 * (A+I) * D^-0.5
+作用: 增加节点本身的影响以及normalization
 
 1）
 输入输出
@@ -12,7 +17,21 @@ K: 每个节点输出特征数
 
 输出 特征矩阵Z (N*K) 表示每个节点的输出特征
 
+GCN运算逻辑：
+数据预处理后(normalization)
+weight 的维度为(D,K) (input_dim,out_dim)
+输入的node feature dot weight
+再将邻接矩阵 dot 23行输出的结果
+(再加上bias)
+
 实际意义对图进行卷积后每个节点都学习到了neighbourhood节点的信息 每次卷积都是相邻节点特征进行学习，
-所以卷积次数决定了学习邻居节点的深度 通常depth 为2-3 为佳
+所以卷积次数决定了学习邻居节点的广度 平均卷积2-3次左右
 
 可以对每个输出节点的特征通过softmax函数进行分类 （节点分类）
+
+GCN的深度(层数)
+GCN的最佳层数和邻居矩阵A的稀疏程度有关系，当图的稀疏度较低时,很快会出现过平滑现象.
+
+GCN的层数应设置为图的平均最短路径(average shortest path)   论文：https://arxiv.org/pdf/1810.05997.pdf
+
+average shortest path 计算方法： https://networkx.org/documentation/networkx-1.10/reference/generated/networkx.algorithms.shortest_paths.generic.average_shortest_path_length.html
