@@ -32,8 +32,8 @@ weight 的维度为(D,K) (input_dim,out_dim)
 
 可以对每个输出节点的特征通过softmax函数进行分类 （节点分类）e.g:
 图 adj_matrix(2708,2708), feature(2708,1433)(after onthot), label(2708,7)(after onthot)
-adj_matrix,feature -->GCN layer1(relu)-->  (2708,256) --> GCN layer2(relu) --> (2708,64)
---> GCN layer3[softmax] -->(2708,7)
+adj_matrix,feature -->GCN layer1(relu)-->  (2708,128) 
+--> GCN layer2(softmax) -->(2708,7)
 
 
 延申：
